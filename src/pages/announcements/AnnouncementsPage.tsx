@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useCMSStore } from '../../stores/cmsStore';
 import { PageHeader } from '../../components/common/PageHeader';
 import { AnnouncementCard } from '../../components/cards/AnnouncementCard';
+import { ResponsiveImage } from '../../components/common/ResponsiveImage';
 import { Announcement, AnnouncementCategory } from '../../types';
 import {
   Search,
@@ -187,6 +188,19 @@ export const AnnouncementsPage: React.FC = () => {
             </div>
 
             <div className="p-6 max-h-[72vh] overflow-y-auto space-y-4">
+              {activeAnnouncement.coverImage && (
+                <div className="rounded-xl overflow-hidden border border-gray-200/80 shadow-xs mb-3">
+                  <ResponsiveImage
+                    src={activeAnnouncement.coverImage}
+                    alt={activeAnnouncement.title}
+                    aspectRatio="16/9"
+                    caption={activeAnnouncement.imageDetails?.caption}
+                    location={activeAnnouncement.imageDetails?.location}
+                    className="rounded-none"
+                  />
+                </div>
+              )}
+
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">
                 {activeAnnouncement.title}
               </h2>

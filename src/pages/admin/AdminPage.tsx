@@ -3,6 +3,7 @@ import { useCMSStore } from '../../stores/cmsStore';
 import { useAuthStore } from '../../stores/authStore';
 import { useUIStore } from '../../stores/uiStore';
 import { PageHeader } from '../../components/common/PageHeader';
+import { DatabaseStudio } from '../../components/database/DatabaseStudio';
 import {
   ShieldCheck,
   Users,
@@ -13,16 +14,18 @@ import {
   AlertTriangle,
   RotateCcw,
   Sparkles,
+  Server,
 } from 'lucide-react';
 import { Role } from '../../types';
 
 export const AdminPage: React.FC = () => {
-  const { users, updateUserRole, resetToDefaults } = useCMSStore();
+  const { users, announcements, resources, updateUserRole, resetToDefaults } = useCMSStore();
   const { user: currentUser } = useAuthStore();
   const { showToast } = useUIStore();
 
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('All');
+  const [activeAdminTab, setActiveAdminTab] = useState<'database' | 'rbac' | 'system'>('database');
 
   const filteredUsers = users.filter((u) => {
     if (roleFilter !== 'All' && u.role !== roleFilter) return false;
@@ -90,8 +93,51 @@ export const AdminPage: React.FC = () => {
         </div>
       </div>
 
-      {/* User RBAC Directory */}
-      <div className="bg-white border border-gray-200/80 rounded-xl p-5 shadow-xs space-y-4">
+      {/* Admin Primary Section Switcher */}
+      <div className="flex items-center gap-2 p-1.5 bg-gray-200/70 rounded-xl w-fit">
+        <button
+          onClick={() => setActiveAdminTab('database')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+            activeAdminTab === 'database'
+              ? 'bg-white text-gray-900 shadow-xs'
+              : 'text-gray-600 hover:text-gray-900'
+          }`}
+        >
+          <Database className="w-4 h-4 text-[#D71920]" />
+          <span>PostgreSQL Relational Studio & SQL Scripts</span>
+        </button>
+
+        <button
+          onClick={() => setActiveAdminTab('rbac')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+            activeAdminTab === 'rbac'
+              ? 'bg-white text-gray-900 shadow-xs'
+              : 'text-gray-600 hover:text-gray-900'
+          }`}
+        >
+          <Users className="w-4 h-4 text-blue-600" />
+          <span>User Directory & RBAC Governance</span>
+        </button>
+
+        <button
+          onClick={() => setActiveAdminTab('system')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+            activeAdminTab === 'system'
+              ? 'bg-white text-gray-900 shadow-xs'
+              : 'text-gray-600 hover:text-gray-900'
+          }`}
+        >
+          <RotateCcw className="w-4 h-4 text-emerald-600" />
+          <span>State Diagnostics & Reset</span>
+        </button>
+      </div>
+
+      {/* TAB 1: PostgreSQL Studio */}
+      {activeAdminTab === 'database' && <DatabaseStudio />}
+
+      {/* TAB 2: RBAC Directory */}
+      {activeAdminTab === 'rbac' && (
+        <div className="bg-white border border-gray-200/80 rounded-xl p-5 shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <div>
             <h3 className="text-base font-bold text-gray-900">User Access Control & Roles</h3>
@@ -184,6 +230,46 @@ export const AdminPage: React.FC = () => {
           </table>
         </div>
       </div>
+      )}
+
+      {/* TAB 3: System Diagnostics & Reset */}
+      {activeAdminTab === 'system' && (
+        <div className="bg-white border border-gray-200/80 rounded-xl p-6 shadow-xs space-y-4">
+          <div className="flex items-start justify-between">
+            <div>
+              <h3 className="text-base font-bold text-gray-900">Prototype State Diagnostics</h3>
+              <p className="text-xs text-gray-500 mt-0.5">
+                Manage local browser state and restore canonical seed data for all departments, teams, and resources.
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                resetToDefaults();
+                showToast('Prototype state successfully reset to canonical seeds!', 'info');
+              }}
+              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-red-700 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 transition-colors"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Reset All State to Seed Defaults</span>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-gray-100 text-xs">
+            <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+              <span className="text-[10px] uppercase font-bold text-gray-400 block">Total Database Entities</span>
+              <span className="text-base font-bold text-gray-900 font-mono mt-1 block">15 Relational Tables</span>
+            </div>
+            <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+              <span className="text-[10px] uppercase font-bold text-gray-400 block">Indexed Entities</span>
+              <span className="text-base font-bold text-gray-900 font-mono mt-1 block">{users.length + announcements.length + resources.length} Live Records</span>
+            </div>
+            <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+              <span className="text-[10px] uppercase font-bold text-gray-400 block">PostgreSQL Migration Readiness</span>
+              <span className="text-base font-bold text-emerald-600 font-mono mt-1 block">100% Production Ready</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

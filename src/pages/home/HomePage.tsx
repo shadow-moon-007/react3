@@ -10,6 +10,7 @@ import { ResourceCard } from '../../components/cards/ResourceCard';
 import { ProjectCard } from '../../components/cards/ProjectCard';
 import { QuickLinkCard } from '../../components/cards/QuickLinkCard';
 import { TeamCard } from '../../components/cards/TeamCard';
+import { ResponsiveImage } from '../../components/common/ResponsiveImage';
 import {
   Users,
   Briefcase,
@@ -27,6 +28,8 @@ import {
   Clock,
   Compass,
   HeartHandshake,
+  MapPin,
+  Activity,
 } from 'lucide-react';
 import { Announcement, Resource, Project } from '../../types';
 
@@ -61,64 +64,91 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-200">
-      {/* 1. HERO BANNER */}
-      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#111111] via-[#1a1a1a] to-[#222222] text-white p-6 sm:p-8 lg:p-10 shadow-lg border border-gray-800">
-        <div className="relative z-10 max-w-3xl">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-[11px] font-mono uppercase tracking-wider bg-[#D71920] px-2.5 py-0.5 rounded font-bold text-white shadow-2xs">
-              Single Source of Truth
-            </span>
-            <span className="text-xs text-gray-400 font-mono">
-              NT-ID: {user?.ntid || 'guest'}
-            </span>
+      {/* 1. HERO BANNER WITH RESPONSIVE IMAGE & DETAILS */}
+      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#111111] via-[#1a1a1a] to-[#222222] text-white p-6 sm:p-8 lg:p-10 shadow-xl border border-gray-800">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          {/* Left Column: Welcome & Quick Navigation */}
+          <div className="lg:col-span-7 space-y-4">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-[11px] font-mono uppercase tracking-wider bg-[#D71920] px-2.5 py-0.5 rounded font-bold text-white shadow-2xs">
+                Single Source of Truth
+              </span>
+              <span className="text-xs text-gray-400 font-mono">
+                NT-ID: {user?.ntid || 'guest'}
+              </span>
+              <span className="text-xs text-emerald-400 font-mono flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Live Systems 99.96%
+              </span>
+            </div>
+
+            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+              Welcome, {user?.name || 'GBS Team Member'}
+            </h1>
+            <p className="text-sm sm:text-base text-gray-300 font-normal leading-relaxed max-w-2xl">
+              Global Business Services operational hub. Discover organizational hierarchy, access
+              enterprise SOPs, connect with colleagues, and track strategic transformation across GBS-BTS and GBS-BO.
+            </p>
+
+            {/* Quick Action Trigger Buttons */}
+            <div className="pt-2 flex flex-wrap items-center gap-2.5">
+              <button
+                onClick={() => setSearchModalOpen(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-white text-gray-900 rounded-lg text-xs font-bold hover:bg-gray-100 transition-colors shadow-xs"
+              >
+                <Search className="w-3.5 h-3.5 text-[#D71920]" />
+                <span>Search Entire Portal (⌘K)</span>
+              </button>
+              <button
+                onClick={() => navigate('/organization')}
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 rounded-lg text-xs font-semibold transition-colors"
+              >
+                <Compass className="w-3.5 h-3.5 text-gray-300" />
+                <span>Org Hierarchy</span>
+              </button>
+              <button
+                onClick={() => navigate('/resources')}
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 rounded-lg text-xs font-semibold transition-colors"
+              >
+                <FileText className="w-3.5 h-3.5 text-gray-300" />
+                <span>Browse SOPs & Docs</span>
+              </button>
+              <button
+                onClick={() => setKudosModalOpen(true)}
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-[#D71920]/80 hover:bg-[#D71920] text-white rounded-lg text-xs font-semibold transition-colors shadow-xs"
+              >
+                <HeartHandshake className="w-3.5 h-3.5" />
+                <span>Send Kudos</span>
+              </button>
+            </div>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
-            Welcome, {user?.name || 'GBS Team Member'}
-          </h1>
-          <p className="text-sm sm:text-base text-gray-300 mt-2 font-normal leading-relaxed">
-            Global Business Services operational hub. Discover organizational hierarchy, access
-            enterprise SOPs, connect with colleagues, and track strategic transformation across GBS-BTS and GBS-BO.
-          </p>
-
-          {/* Quick Action Trigger Buttons */}
-          <div className="mt-6 flex flex-wrap items-center gap-2.5">
-            <button
-              onClick={() => setSearchModalOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-white text-gray-900 rounded-lg text-xs font-bold hover:bg-gray-100 transition-colors shadow-xs"
-            >
-              <Search className="w-3.5 h-3.5 text-[#D71920]" />
-              <span>Search Entire Portal (⌘K)</span>
-            </button>
-            <button
-              onClick={() => navigate('/organization')}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 rounded-lg text-xs font-semibold transition-colors"
-            >
-              <Compass className="w-3.5 h-3.5 text-gray-300" />
-              <span>Org Hierarchy</span>
-            </button>
-            <button
-              onClick={() => navigate('/resources')}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 rounded-lg text-xs font-semibold transition-colors"
-            >
-              <FileText className="w-3.5 h-3.5 text-gray-300" />
-              <span>Browse SOPs & Docs</span>
-            </button>
-            <button
-              onClick={() => setKudosModalOpen(true)}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#D71920]/80 hover:bg-[#D71920] text-white rounded-lg text-xs font-semibold transition-colors shadow-xs"
-            >
-              <HeartHandshake className="w-3.5 h-3.5" />
-              <span>Send Kudos</span>
-            </button>
+          {/* Right Column: High-Fidelity Responsive Operations Center Image with Details */}
+          <div className="lg:col-span-5">
+            <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-black/40 backdrop-blur-xs">
+              <ResponsiveImage
+                src="/src/assets/images/hero_gbs_operations_1791784024601.jpg"
+                alt="GBS Global Operations Center & Video Wall"
+                aspectRatio="16/9"
+                caption="Live GBS Command Center · 24/7 Global Telemetry & Cross-Regional Operations"
+                location="Canary Wharf HQ · Level 18 Innovation Deck"
+                photographer="Corporate Communications Bureau"
+                className="rounded-none"
+              />
+              <div className="p-3 bg-gray-950/80 border-t border-white/10 text-xs flex items-center justify-between">
+                <span className="text-[11px] font-mono text-gray-400">
+                  Global Hubs: Bangalore · London · Zurich · Singapore · NY
+                </span>
+                <span className="text-[10px] uppercase font-bold text-[#D71920] font-mono">
+                  Operational 24/7
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Subtle decorative motif */}
-        <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-radial from-red-600/10 via-transparent to-transparent pointer-events-none hidden lg:block" />
-        <div className="absolute right-8 bottom-6 opacity-10 pointer-events-none text-right hidden xl:block">
-          <span className="text-8xl font-black font-mono tracking-tighter text-white">GBS</span>
-        </div>
+        {/* Subtle decorative background glow */}
+        <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-radial from-red-600/10 via-transparent to-transparent pointer-events-none" />
       </section>
 
       {/* 2. GBS AT A GLANCE (KPIs) */}

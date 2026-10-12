@@ -33,6 +33,12 @@ export const mockDepartments: Department[] = [
     teamsCount: 48,
     activeProjectsCount: 84,
     color: '#D71920',
+    coverImage: '/src/assets/images/hero_gbs_operations_1791784024601.jpg',
+    imageDetails: {
+      caption: 'Global Business Services Operations Command Center & Telemetry Video Wall',
+      location: 'London Canary Wharf HQ',
+      photographer: 'Enterprise Media Unit',
+    },
     metrics: [
       { label: 'Global Service SLA', value: '99.8%', change: '+0.4%', trend: 'up' },
       { label: 'Annualized Value Generated', value: '$84.2M', change: '+18.5%', trend: 'up' },
@@ -64,6 +70,12 @@ export const mockDepartments: Department[] = [
     teamsCount: 26,
     activeProjectsCount: 52,
     color: '#2563EB',
+    coverImage: '/src/assets/images/bts_tech_architecture_1791784039637.jpg',
+    imageDetails: {
+      caption: 'Cloud Infrastructure & Microservices Architecture Collaborative Lab',
+      location: 'Bangalore Technology Innovation Hub',
+      photographer: 'GBS Tech Lens',
+    },
     metrics: [
       { label: 'System Uptime Across Platforms', value: '99.96%', change: '+0.04%', trend: 'up' },
       { label: 'DevSecOps Release Frequency', value: '142 / month', change: '+24%', trend: 'up' },
@@ -95,6 +107,12 @@ export const mockDepartments: Department[] = [
     teamsCount: 22,
     activeProjectsCount: 32,
     color: '#059669',
+    coverImage: '/src/assets/images/bo_business_operations_1791784056212.jpg',
+    imageDetails: {
+      caption: 'Global Logistics Orchestration & Strategic Sourcing Boardroom',
+      location: 'Zurich Operational Center',
+      photographer: 'Corporate Operations Journal',
+    },
     metrics: [
       { label: 'Invoice Processing Automation', value: '94.8%', change: '+7.1%', trend: 'up' },
       { label: 'Vendor Compliance Rate', value: '99.2%', change: '+1.1%', trend: 'up' },
@@ -525,6 +543,12 @@ Executive Vice President, Global Head of GBS`,
     views: 1840,
     likes: 312,
     tags: ['Strategy', 'Leadership', 'Roadmap', 'Vision 2027'],
+    coverImage: '/src/assets/images/executive_townhall_summit_1791784068697.jpg',
+    imageDetails: {
+      caption: 'GBS Annual Global Leadership Keynote Address & Vision 2027 Unveiling',
+      location: 'New York Executive Center Amphitheater',
+      eventDate: 'October 2026',
+    },
     attachments: [
       { name: 'GBS_Strategy_Blueprint_2027.pdf', size: '4.8 MB', type: 'PDF' },
       { name: 'Townhall_Keynote_Deck.pptx', size: '12.4 MB', type: 'PPTX' },
@@ -549,6 +573,12 @@ Access keys can be provisioned through ServiceNow under "AI Gateway Access Reque
     views: 1290,
     likes: 245,
     tags: ['AI Gateway', 'Cloud', 'Compliance', 'Security'],
+    coverImage: '/src/assets/images/bts_tech_architecture_1791784039637.jpg',
+    imageDetails: {
+      caption: 'BTS Intelligent Automation & Cloud Architecture Engineering Hub',
+      location: 'Bangalore Technology Innovation Hub',
+      eventDate: 'October 2026',
+    },
     attachments: [{ name: 'Enterprise_AI_SDK_Guide.pdf', size: '2.1 MB', type: 'PDF' }],
   },
   {

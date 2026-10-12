@@ -1,7 +1,8 @@
 import React from 'react';
 import { Announcement } from '../../types';
-import { Eye, Heart, Paperclip, ChevronRight } from 'lucide-react';
+import { Eye, Heart, Paperclip, ChevronRight, MapPin } from 'lucide-react';
 import { useCMSStore } from '../../stores/cmsStore';
+import { ResponsiveImage } from '../common/ResponsiveImage';
 
 interface AnnouncementCardProps {
   announcement: Announcement;
@@ -30,43 +31,64 @@ export const AnnouncementCard: React.FC<AnnouncementCardProps> = ({
   return (
     <div
       onClick={() => onSelect && onSelect(announcement)}
-      className={`bg-white border rounded-xl p-5 shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group ${
+      className={`bg-white border rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group ${
         featured
           ? 'border-red-200/90 ring-1 ring-[#D71920]/15'
           : 'border-gray-200/80 hover:border-gray-300'
       }`}
     >
       <div>
-        {/* Unboxed clean metadata (Zero-Pill discipline) */}
-        <div className="flex items-center gap-2 text-xs text-gray-500 mb-2">
-          <span className="font-semibold text-gray-800">{announcement.category}</span>
-          <span aria-hidden="true">·</span>
-          <span>{announcement.department}</span>
-          <span aria-hidden="true">·</span>
-          <span>{formattedDate}</span>
-          {announcement.isUrgent && (
-            <>
-              <span aria-hidden="true">·</span>
-              <span className="font-bold text-[#D71920] uppercase text-[10px] tracking-wide">
-                Priority
+        {/* Responsive Cover Image */}
+        {announcement.coverImage && (
+          <div className="relative">
+            <ResponsiveImage
+              src={announcement.coverImage}
+              alt={announcement.title}
+              aspectRatio="16/9"
+              caption={announcement.imageDetails?.caption}
+              location={announcement.imageDetails?.location}
+              className="rounded-none border-b border-gray-100"
+            />
+            {announcement.isUrgent && (
+              <span className="absolute top-3 left-3 z-10 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#D71920] text-white shadow-xs">
+                Executive Priority
               </span>
-            </>
-          )}
+            )}
+          </div>
+        )}
+
+        <div className="p-5">
+          {/* Unboxed clean metadata (Zero-Pill discipline) */}
+          <div className="flex items-center gap-2 text-xs text-gray-500 mb-2">
+            <span className="font-semibold text-gray-800">{announcement.category}</span>
+            <span aria-hidden="true">·</span>
+            <span>{announcement.department}</span>
+            <span aria-hidden="true">·</span>
+            <span>{formattedDate}</span>
+            {announcement.isUrgent && !announcement.coverImage && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span className="font-bold text-[#D71920] uppercase text-[10px] tracking-wide">
+                  Priority
+                </span>
+              </>
+            )}
+          </div>
+
+          {/* Title */}
+          <h3 className="text-base font-bold text-gray-900 group-hover:text-[#D71920] transition-colors leading-snug line-clamp-2">
+            {announcement.title}
+          </h3>
+
+          {/* Summary */}
+          <p className="text-xs text-gray-600 mt-2 leading-relaxed line-clamp-2">
+            {announcement.summary}
+          </p>
         </div>
-
-        {/* Title */}
-        <h3 className="text-base font-bold text-gray-900 group-hover:text-[#D71920] transition-colors leading-snug line-clamp-2">
-          {announcement.title}
-        </h3>
-
-        {/* Summary */}
-        <p className="text-xs text-gray-600 mt-2 leading-relaxed line-clamp-2">
-          {announcement.summary}
-        </p>
       </div>
 
       {/* Author & Footer Interactions */}
-      <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+      <div className="px-5 pb-4 pt-3 border-t border-gray-100 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <img
             src={announcement.authorAvatar}
