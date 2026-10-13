@@ -3,8 +3,7 @@ import { useCMSStore } from '../../stores/cmsStore';
 import { DepartmentCard } from '../../components/cards/DepartmentCard';
 import { PageHeader } from '../../components/common/PageHeader';
 import { KPIWidget } from '../../components/cards/KPIWidget';
-import { ResponsiveImage } from '../../components/common/ResponsiveImage';
-import { Building2, Users, Briefcase, Award, ShieldCheck, Compass, MapPin } from 'lucide-react';
+import { Building2, Users, Briefcase, Award, ShieldCheck, Compass } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export const DepartmentsPage: React.FC = () => {
@@ -32,56 +31,41 @@ export const DepartmentsPage: React.FC = () => {
       />
 
       {/* Top Level: GBS Global Overview Card */}
-      <div className="bg-white border border-gray-200/80 rounded-2xl overflow-hidden shadow-xs">
-        {gbsGlobal.coverImage && (
-          <div className="relative">
-            <ResponsiveImage
-              src={gbsGlobal.coverImage}
-              alt="GBS Global Headquarters & Operations Command Center"
-              aspectRatio="16/9"
-              caption={gbsGlobal.imageDetails?.caption}
-              location={gbsGlobal.imageDetails?.location}
-              photographer={gbsGlobal.imageDetails?.photographer}
-              className="rounded-none max-h-72 border-b border-gray-100"
+      <div className="bg-white border border-gray-200/80 rounded-2xl p-6 sm:p-8 shadow-xs">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-gray-100">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-[11px] font-mono uppercase tracking-wider bg-gray-900 text-white px-2 py-0.5 rounded font-bold">
+                Parent Organization
+              </span>
+              <span className="text-xs text-gray-400 font-mono">CODE: {gbsGlobal.code}</span>
+            </div>
+            <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">
+              {gbsGlobal.name}
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-600 mt-2 leading-relaxed">
+              {gbsGlobal.description}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-4 bg-gray-50/80 p-4 rounded-xl border border-gray-200/70 shrink-0">
+            <img
+              src={gbsGlobal.headAvatar}
+              alt={gbsGlobal.headName}
+              className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-xs"
             />
-          </div>
-        )}
-
-        <div className="p-6 sm:p-8">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-gray-100">
-            <div className="max-w-2xl">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-[11px] font-mono uppercase tracking-wider bg-gray-900 text-white px-2 py-0.5 rounded font-bold">
-                  Parent Organization
-                </span>
-                <span className="text-xs text-gray-400 font-mono">CODE: {gbsGlobal.code}</span>
-              </div>
-              <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">
-                {gbsGlobal.name}
-              </h2>
-              <p className="text-xs sm:text-sm text-gray-600 mt-2 leading-relaxed">
-                {gbsGlobal.description}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-4 bg-gray-50/80 p-4 rounded-xl border border-gray-200/70 shrink-0">
-              <img
-                src={gbsGlobal.headAvatar}
-                alt={gbsGlobal.headName}
-                className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-xs"
-              />
-              <div className="text-xs">
-                <span className="text-[10px] uppercase font-bold text-gray-400 block tracking-wider">
-                  Global Head of GBS
-                </span>
-                <span className="text-sm font-bold text-gray-900 block">{gbsGlobal.headName}</span>
-                <span className="text-gray-500 text-[11px] block">{gbsGlobal.headTitle}</span>
-                <span className="text-gray-400 font-mono text-[10px] mt-0.5 block">
-                  NTID: {gbsGlobal.headNtid}
-                </span>
-              </div>
+            <div className="text-xs">
+              <span className="text-[10px] uppercase font-bold text-gray-400 block tracking-wider">
+                Global Head of GBS
+              </span>
+              <span className="text-sm font-bold text-gray-900 block">{gbsGlobal.headName}</span>
+              <span className="text-gray-500 text-[11px] block">{gbsGlobal.headTitle}</span>
+              <span className="text-gray-400 font-mono text-[10px] mt-0.5 block">
+                NTID: {gbsGlobal.headNtid}
+              </span>
             </div>
           </div>
+        </div>
 
         {/* Strategic Priorities */}
         <div className="mt-6">
@@ -99,7 +83,6 @@ export const DepartmentsPage: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
         </div>
       </div>
 

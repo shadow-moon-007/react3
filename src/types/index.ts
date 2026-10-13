@@ -35,12 +35,6 @@ export interface Department {
   teamsCount: number;
   activeProjectsCount: number;
   color: string;
-  coverImage?: string;
-  imageDetails?: {
-    caption?: string;
-    location?: string;
-    photographer?: string;
-  };
   metrics: {
     label: string;
     value: string;
@@ -94,12 +88,6 @@ export interface Announcement {
   views: number;
   likes: number;
   tags: string[];
-  coverImage?: string;
-  imageDetails?: {
-    caption?: string;
-    location?: string;
-    eventDate?: string;
-  };
   attachments?: {
     name: string;
     size: string;

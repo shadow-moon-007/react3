@@ -8,7 +8,6 @@ import { ResourceCard } from '../../components/cards/ResourceCard';
 import { AnnouncementCard } from '../../components/cards/AnnouncementCard';
 import { AchievementCard } from '../../components/cards/AchievementCard';
 import { KPIWidget } from '../../components/cards/KPIWidget';
-import { ResponsiveImage } from '../../components/common/ResponsiveImage';
 import {
   Users,
   Briefcase,
@@ -21,8 +20,6 @@ import {
   TrendingUp,
   CheckCircle2,
   ShieldCheck,
-  MapPin,
-  Camera,
 } from 'lucide-react';
 
 export const DepartmentDetailPage: React.FC = () => {
@@ -74,65 +71,6 @@ export const DepartmentDetailPage: React.FC = () => {
           <span>Back to All Departments</span>
         </button>
       </div>
-
-      {/* Department Operating Facility & Hub Banner (Responsive Image with Provenance Details) */}
-      {dept.coverImage && (
-        <div className="bg-white border border-gray-200/80 rounded-2xl overflow-hidden shadow-xs">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-            <div className="lg:col-span-8">
-              <ResponsiveImage
-                src={dept.coverImage}
-                alt={`${dept.name} Operating Facility`}
-                aspectRatio="16/9"
-                caption={dept.imageDetails?.caption}
-                location={dept.imageDetails?.location}
-                photographer={dept.imageDetails?.photographer}
-                className="rounded-none h-full min-h-[260px]"
-              />
-            </div>
-            <div className="lg:col-span-4 p-5 sm:p-6 bg-gray-50 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-gray-100">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-gray-500">
-                    Primary Operational Center
-                  </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white border border-gray-200 text-gray-700 font-bold">
-                    {dept.code}
-                  </span>
-                </div>
-                <h3 className="text-base font-bold text-gray-900 leading-snug">
-                  {dept.imageDetails?.caption || `${dept.name} Global Facility`}
-                </h3>
-                <div className="space-y-2 text-xs text-gray-600">
-                  {dept.imageDetails?.location && (
-                    <div className="flex items-center gap-1.5 font-mono text-[11px] text-gray-500">
-                      <MapPin className="w-3.5 h-3.5 text-[#D71920]" />
-                      <span>{dept.imageDetails.location}</span>
-                    </div>
-                  )}
-                  {dept.imageDetails?.photographer && (
-                    <div className="flex items-center gap-1.5 font-mono text-[11px] text-gray-500">
-                      <Camera className="w-3.5 h-3.5 text-gray-400" />
-                      <span>Credit: {dept.imageDetails.photographer}</span>
-                    </div>
-                  )}
-                  <p className="text-[11px] text-gray-500 leading-relaxed pt-1">
-                    Certified enterprise hub housing dedicated engineering clusters, operations war-rooms, and multi-region network terminals.
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-gray-200/70 text-[11px] text-gray-500 flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Telemetry: Live</span>
-                </span>
-                <span className="text-[#16A34A] font-bold font-mono">99.96% SLA</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Department Hero Banner */}
       <div className="bg-white border border-gray-200/80 rounded-2xl p-6 sm:p-8 shadow-xs">

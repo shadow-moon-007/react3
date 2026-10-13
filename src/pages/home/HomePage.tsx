@@ -10,8 +10,6 @@ import { ResourceCard } from '../../components/cards/ResourceCard';
 import { ProjectCard } from '../../components/cards/ProjectCard';
 import { QuickLinkCard } from '../../components/cards/QuickLinkCard';
 import { TeamCard } from '../../components/cards/TeamCard';
-import { GbsGlanceFeature } from '../../components/home/GbsGlanceFeature';
-import { InsideGbsSection } from '../../components/home/InsideGbsSection';
 import {
   Users,
   Briefcase,
@@ -122,9 +120,6 @@ export const HomePage: React.FC = () => {
           <span className="text-8xl font-black font-mono tracking-tighter text-white">GBS</span>
         </div>
       </section>
-
-      {/* FEATURED GBS AT A GLANCE (VISUAL STORYTELLING BANNER) */}
-      <GbsGlanceFeature />
 
       {/* 2. GBS AT A GLANCE (KPIs) */}
       <section>
@@ -280,9 +275,6 @@ export const HomePage: React.FC = () => {
           ))}
         </div>
       </section>
-
-      {/* NEW: INSIDE GBS (IMAGE-LED STRATEGIC PILLARS) */}
-      <InsideGbsSection />
 
       {/* 6. LEADERSHIP MESSAGE & UPCOMING EVENTS */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-5">

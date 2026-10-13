@@ -3,7 +3,6 @@ import { Resource } from '../../types';
 import { Download, FileText, FileSpreadsheet, Presentation, Globe, Clock, User } from 'lucide-react';
 import { useCMSStore } from '../../stores/cmsStore';
 import { useUIStore } from '../../stores/uiStore';
-import { SopDocumentCover } from './SopDocumentCover';
 
 interface ResourceCardProps {
   resource: Resource;
@@ -49,9 +48,11 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onPreview 
           <span className="font-mono text-[11px] text-gray-400">v{resource.version}</span>
         </div>
 
-        {/* Document Thumbnail Cover & Title */}
+        {/* Title & File Icon */}
         <div className="flex items-start gap-3">
-          <SopDocumentCover resource={resource} />
+          <div className={`p-2 rounded-lg shrink-0 ${typeColor}`}>
+            <Icon className="w-5 h-5" />
+          </div>
           <div className="flex-1 min-w-0">
             <h4 className="text-sm font-bold text-gray-900 group-hover:text-[#D71920] transition-colors leading-snug line-clamp-2">
               {resource.title}
