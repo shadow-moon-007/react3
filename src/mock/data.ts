@@ -543,12 +543,6 @@ Executive Vice President, Global Head of GBS`,
     views: 1840,
     likes: 312,
     tags: ['Strategy', 'Leadership', 'Roadmap', 'Vision 2027'],
-    coverImage: '/src/assets/images/executive_townhall_summit_1791784068697.jpg',
-    imageDetails: {
-      caption: 'GBS Annual Global Leadership Keynote Address & Vision 2027 Unveiling',
-      location: 'New York Executive Center Amphitheater',
-      eventDate: 'October 2026',
-    },
     attachments: [
       { name: 'GBS_Strategy_Blueprint_2027.pdf', size: '4.8 MB', type: 'PDF' },
       { name: 'Townhall_Keynote_Deck.pptx', size: '12.4 MB', type: 'PPTX' },
@@ -573,12 +567,6 @@ Access keys can be provisioned through ServiceNow under "AI Gateway Access Reque
     views: 1290,
     likes: 245,
     tags: ['AI Gateway', 'Cloud', 'Compliance', 'Security'],
-    coverImage: '/src/assets/images/bts_tech_architecture_1791784039637.jpg',
-    imageDetails: {
-      caption: 'BTS Intelligent Automation & Cloud Architecture Engineering Hub',
-      location: 'Bangalore Technology Innovation Hub',
-      eventDate: 'October 2026',
-    },
     attachments: [{ name: 'Enterprise_AI_SDK_Guide.pdf', size: '2.1 MB', type: 'PDF' }],
   },
   {

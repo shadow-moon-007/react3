@@ -336,7 +336,7 @@ VALUES
 ON CONFLICT (id) DO NOTHING;
 
 -- 6. SEED ANNOUNCEMENTS
-INSERT INTO announcements (id, title, summary, content, category, department_id, author_user_id, published_at, is_urgent, is_featured, read_time_minutes, views_count, likes_count, tags, cover_image, image_details)
+INSERT INTO announcements (id, title, summary, content, category, department_id, author_user_id, published_at, is_urgent, is_featured, read_time_minutes, views_count, likes_count, tags)
 VALUES
 (
     'ann-001',
@@ -352,9 +352,7 @@ VALUES
     4,
     1840,
     312,
-    ARRAY['Strategy', 'Leadership', 'Roadmap', 'Vision 2027'],
-    '/src/assets/images/executive_townhall_summit_1791784068697.jpg',
-    '{"caption": "GBS Annual Global Leadership Keynote Address & Vision 2027 Unveiling", "location": "New York Executive Center Amphitheater", "eventDate": "October 2026"}'::jsonb
+    ARRAY['Strategy', 'Leadership', 'Roadmap', 'Vision 2027']
 ),
 (
     'ann-002',
@@ -370,9 +368,7 @@ VALUES
     3,
     1290,
     245,
-    ARRAY['AI Gateway', 'Cloud', 'Compliance', 'Security'],
-    '/src/assets/images/bts_tech_architecture_1791784039637.jpg',
-    '{"caption": "BTS Intelligent Automation & Cloud Architecture Engineering Hub", "location": "Bangalore Technology Innovation Hub", "eventDate": "October 2026"}'::jsonb
+    ARRAY['AI Gateway', 'Cloud', 'Compliance', 'Security']
 )
 ON CONFLICT (id) DO NOTHING;
 

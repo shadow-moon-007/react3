@@ -152,8 +152,6 @@ CREATE TABLE IF NOT EXISTS announcements (
     views_count INT NOT NULL DEFAULT 0,
     likes_count INT NOT NULL DEFAULT 0,
     tags TEXT[] NOT NULL DEFAULT '{}',
-    cover_image TEXT,
-    image_details JSONB NOT NULL DEFAULT '{}'::jsonb,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

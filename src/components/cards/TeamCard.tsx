@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Team } from '../../types';
 import { useNavigate } from 'react-router-dom';
-import { Users, MapPin, Award, ChevronRight, Layers } from 'lucide-react';
+import { Users, MapPin, Award, ChevronRight, Layers, Cloud, Sparkles } from 'lucide-react';
+
+import cloudDevOpsImg from '../../assets/images/team_cloud_devops_1791870932385.jpg';
+import automationAiImg from '../../assets/images/team_automation_ai_1791870934051.jpg';
 
 interface TeamCardProps {
   team: Team;
@@ -9,6 +12,14 @@ interface TeamCardProps {
 
 export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
   const navigate = useNavigate();
+  const [bannerError, setBannerError] = useState(false);
+
+  const teamBanner =
+    team.id === 'team-bts-01' || team.name.toLowerCase().includes('cloud')
+      ? cloudDevOpsImg
+      : team.id === 'team-bts-02' || team.name.toLowerCase().includes('automation')
+      ? automationAiImg
+      : null;
 
   return (
     <div
@@ -16,6 +27,29 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
       className="bg-white border border-gray-200/80 rounded-xl p-5 shadow-xs hover:shadow-md hover:border-gray-300 transition-all cursor-pointer flex flex-col justify-between group"
     >
       <div>
+        {/* Compact Thematic Image Banner */}
+        {teamBanner && (
+          <div className="relative h-24 sm:h-28 w-full rounded-lg overflow-hidden border border-gray-150 mb-3 bg-slate-900 group-hover:border-gray-300 transition-colors">
+            {!bannerError ? (
+              <img
+                src={teamBanner}
+                alt={`${team.name} technology visual`}
+                className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-300"
+                onError={() => setBannerError(true)}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-slate-900 text-gray-400">
+                <Layers className="w-6 h-6 text-[#D71920]" />
+              </div>
+            )}
+            <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-xs text-[9px] font-mono text-gray-200">
+              {team.departmentId}
+            </div>
+          </div>
+        )}
+
         {/* Top Header */}
         <div className="flex items-start justify-between gap-2 mb-2">
           <div>

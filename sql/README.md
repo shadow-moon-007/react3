@@ -48,7 +48,7 @@ This directory contains the production-ready PostgreSQL relational database sche
 3. **`department_metrics`**: Operational SLAs and KPIs with historical trend comparisons (`up`, `down`, `neutral`).
 4. **`teams`**: Specialized technical and operational units (e.g., Cloud & DevOps, Intelligent Automation, Global Strategic Procurement).
 5. **`team_members`**: Junction table mapping many-to-many employee assignments to functional teams.
-6. **`announcements`**: Executive bulletins and directives with categories (`Executive`, `Technology`, `Operations`, etc.), priority flags, views/likes, cover images, and markdown content.
+6. **`announcements`**: Executive bulletins and directives with categories (`Executive`, `Technology`, `Operations`, etc.), priority flags, read time metrics, views/likes, and rich markdown text content.
 7. **`announcement_attachments`**: Downloadable files attached to bulletins (PDF, PPTX).
 8. **`announcement_likes`**: User likes tracking for internal communications analytics.
 9. **`resources`**: Centralized knowledge center and SOP repository with versioning, categories (`SOPs`, `Policies`, `Templates`, etc.), file types, and download telemetry.

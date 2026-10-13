@@ -1,8 +1,7 @@
 import React from 'react';
 import { Announcement } from '../../types';
-import { Eye, Heart, Paperclip, ChevronRight, MapPin } from 'lucide-react';
+import { Eye, Heart, Paperclip, ChevronRight } from 'lucide-react';
 import { useCMSStore } from '../../stores/cmsStore';
-import { ResponsiveImage } from '../common/ResponsiveImage';
 
 interface AnnouncementCardProps {
   announcement: Announcement;
@@ -38,41 +37,19 @@ export const AnnouncementCard: React.FC<AnnouncementCardProps> = ({
       }`}
     >
       <div>
-        {/* Responsive Cover Image */}
-        {announcement.coverImage && (
-          <div className="relative">
-            <ResponsiveImage
-              src={announcement.coverImage}
-              alt={announcement.title}
-              aspectRatio="16/9"
-              caption={announcement.imageDetails?.caption}
-              location={announcement.imageDetails?.location}
-              className="rounded-none border-b border-gray-100"
-            />
-            {announcement.isUrgent && (
-              <span className="absolute top-3 left-3 z-10 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#D71920] text-white shadow-xs">
-                Executive Priority
-              </span>
-            )}
-          </div>
-        )}
-
         <div className="p-5">
           {/* Unboxed clean metadata (Zero-Pill discipline) */}
           <div className="flex items-center gap-2 text-xs text-gray-500 mb-2">
+            {announcement.isUrgent && (
+              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#D71920] text-white shadow-xs mr-1">
+                Priority
+              </span>
+            )}
             <span className="font-semibold text-gray-800">{announcement.category}</span>
             <span aria-hidden="true">·</span>
             <span>{announcement.department}</span>
             <span aria-hidden="true">·</span>
             <span>{formattedDate}</span>
-            {announcement.isUrgent && !announcement.coverImage && (
-              <>
-                <span aria-hidden="true">·</span>
-                <span className="font-bold text-[#D71920] uppercase text-[10px] tracking-wide">
-                  Priority
-                </span>
-              </>
-            )}
           </div>
 
           {/* Title */}
