@@ -3,6 +3,7 @@ import { Resource } from '../../types';
 import { Download, FileText, FileSpreadsheet, Presentation, Globe, Clock, User } from 'lucide-react';
 import { useCMSStore } from '../../stores/cmsStore';
 import { useUIStore } from '../../stores/uiStore';
+import { DocumentCoverThumbnail } from '../common/DocumentCoverThumbnail';
 
 interface ResourceCardProps {
   resource: Resource;
@@ -19,19 +20,6 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onPreview 
     showToast(`Downloading "${resource.title}" (${resource.fileSize})...`, 'success');
   };
 
-  let Icon = FileText;
-  let typeColor = 'text-red-600 bg-red-50';
-  if (resource.fileType === 'XLSX') {
-    Icon = FileSpreadsheet;
-    typeColor = 'text-emerald-600 bg-emerald-50';
-  } else if (resource.fileType === 'PPTX') {
-    Icon = Presentation;
-    typeColor = 'text-amber-600 bg-amber-50';
-  } else if (resource.fileType === 'URL') {
-    Icon = Globe;
-    typeColor = 'text-blue-600 bg-blue-50';
-  }
-
   return (
     <div
       onClick={() => onPreview && onPreview(resource)}
@@ -39,7 +27,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onPreview 
     >
       <div>
         {/* Unboxed Metadata Header (Zero-Pill Discipline) */}
-        <div className="flex items-center justify-between text-xs text-gray-500 mb-2.5">
+        <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
           <div className="flex items-center gap-1.5">
             <span className="font-semibold text-gray-800">{resource.category}</span>
             <span aria-hidden="true">·</span>
@@ -48,11 +36,9 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onPreview 
           <span className="font-mono text-[11px] text-gray-400">v{resource.version}</span>
         </div>
 
-        {/* Title & File Icon */}
-        <div className="flex items-start gap-3">
-          <div className={`p-2 rounded-lg shrink-0 ${typeColor}`}>
-            <Icon className="w-5 h-5" />
-          </div>
+        {/* Title & Document Cover Thumbnail */}
+        <div className="flex items-start gap-3.5">
+          <DocumentCoverThumbnail resource={resource} />
           <div className="flex-1 min-w-0">
             <h4 className="text-sm font-bold text-gray-900 group-hover:text-[#D71920] transition-colors leading-snug line-clamp-2">
               {resource.title}

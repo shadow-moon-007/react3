@@ -1,7 +1,8 @@
 import React from 'react';
 import { Department } from '../../types';
 import { useNavigate } from 'react-router-dom';
-import { Users, Briefcase, ArrowRight, ShieldCheck, Layers } from 'lucide-react';
+import { Users, Briefcase, ArrowRight, ShieldCheck, Layers, Server, Workflow } from 'lucide-react';
+import { SafeImage } from '../common/SafeImage';
 
 interface DepartmentCardProps {
   department: Department;
@@ -10,14 +11,55 @@ interface DepartmentCardProps {
 export const DepartmentCard: React.FC<DepartmentCardProps> = ({ department }) => {
   const navigate = useNavigate();
 
+  // Thematic imagery mapping per department
+  const isBTS = department.id === 'GBS-BTS';
+  const isBO = department.id === 'GBS-BO';
+
+  const imageUrl = isBTS
+    ? 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80'
+    : isBO
+    ? 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80'
+    : 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=80';
+
+  const imageAlt = isBTS
+    ? 'Modern data centers, cloud infrastructure and server architecture'
+    : isBO
+    ? 'Business operations team collaborating on process optimization'
+    : 'Global enterprise facilities';
+
+  const imageLabel = isBTS
+    ? 'Cloud & Server Architecture'
+    : isBO
+    ? 'Operational Excellence'
+    : 'Enterprise Campus';
+
   return (
-    <div className="bg-white border border-gray-200/80 rounded-xl p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
+    <div className="bg-white border border-gray-200/80 rounded-xl p-5 sm:p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
       <div>
+        {/* Compact 16:9 Landscape Thumbnail (Enhances rather than dominates) */}
+        <div className="w-full aspect-[16/9] max-h-36 rounded-lg overflow-hidden mb-4 bg-slate-900 border border-gray-100 relative shrink-0">
+          <SafeImage
+            src={imageUrl}
+            alt={imageAlt}
+            className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+            fallbackText={department.name}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute bottom-2 left-2.5 px-2 py-0.5 rounded bg-black/60 backdrop-blur-xs text-[10px] font-mono text-white/90 flex items-center gap-1.5">
+            {isBTS ? (
+              <Server className="w-3 h-3 text-blue-400" />
+            ) : (
+              <Workflow className="w-3 h-3 text-emerald-400" />
+            )}
+            <span>{imageLabel}</span>
+          </div>
+        </div>
+
         {/* Top bar */}
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex items-center gap-3">
             <div
-              className="w-10 h-10 rounded-lg flex items-center justify-center font-bold font-mono text-sm shadow-xs"
+              className="w-10 h-10 rounded-lg flex items-center justify-center font-bold font-mono text-sm shadow-xs shrink-0"
               style={{
                 backgroundColor: `${department.color}15`,
                 color: department.color,
@@ -33,7 +75,7 @@ export const DepartmentCard: React.FC<DepartmentCardProps> = ({ department }) =>
               <p className="text-xs text-gray-400 font-mono">{department.code}</p>
             </div>
           </div>
-          <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-gray-100 text-gray-600">
+          <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-gray-100 text-gray-600 shrink-0">
             {department.teamsCount} Teams
           </span>
         </div>

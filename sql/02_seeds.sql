@@ -5,7 +5,7 @@
 BEGIN;
 
 -- 1. SEED DEPARTMENTS (Without head FK first to avoid circular reference)
-INSERT INTO departments (id, code, name, short_name, tagline, description, mission, color, strategic_priorities)
+INSERT INTO departments (id, code, name, short_name, tagline, description, mission, color, employee_count, teams_count, active_projects_count, cover_image, image_details, strategic_priorities)
 VALUES
 (
     'GBS',
@@ -16,6 +16,11 @@ VALUES
     'GBS is the unified operational backbone of the enterprise, consolidating business technology, digital transformation, supply chain orchestration, and end-to-end operational capabilities into a high-performance global delivery network.',
     'To deliver world-class business outcomes, seamless digital platforms, and frictionless operational experiences across all regions while eliminating silos and driving measurable value.',
     '#D71920',
+    1420,
+    48,
+    84,
+    '/src/assets/images/hero_gbs_operations_1791784024601.jpg',
+    '{"caption": "Global Business Services Operations Command Center & Telemetry Video Wall", "location": "London Canary Wharf HQ", "photographer": "Enterprise Media Unit"}'::jsonb,
     '["Autonomous Enterprise Operations & Agentic Workflows", "Unified Data Lakehouse & Real-time Telemetry", "Zero-Trust Global Security & Resilience Architecture", "Standardized Global Shared Service Centers across EMEA, APAC & Americas"]'::jsonb
 ),
 (
@@ -27,6 +32,11 @@ VALUES
     'GBS-BTS delivers enterprise-grade software architecture, cloud platforms, cybersecurity, AI automation, and shared technology infrastructure supporting 40,000+ corporate employees globally.',
     'Empowering business lines through modern scalable infrastructure, intuitive applications, and intelligent automation that accelerates time-to-market.',
     '#2563EB',
+    820,
+    26,
+    52,
+    '/src/assets/images/bts_tech_architecture_1791784039637.jpg',
+    '{"caption": "Cloud Infrastructure & Microservices Architecture Collaborative Lab", "location": "Bangalore Technology Innovation Hub", "photographer": "GBS Tech Lens"}'::jsonb,
     '["Next-Gen Multi-Cloud Hybrid Mesh (AWS/Azure/GCP)", "Enterprise Copilot & GenAI Gateway Rollout", "Zero-Day Vulnerability Shield & SOC Automation", "Microservices Transformation of Legacy ERP Integrations"]'::jsonb
 ),
 (
@@ -38,6 +48,11 @@ VALUES
     'GBS-BO orchestrates end-to-end business operations including source-to-pay procurement, order-to-cash, hire-to-retire shared HR services, and enterprise compliance across 34 countries.',
     'Delivering hyper-efficient, compliance-certified, and customer-centric business workflows that enable rapid organizational agility and operational cost-leadership.',
     '#059669',
+    600,
+    22,
+    32,
+    '/src/assets/images/bo_business_operations_1791784056212.jpg',
+    '{"caption": "Global Logistics Orchestration & Strategic Sourcing Boardroom", "location": "Zurich Operational Center", "photographer": "Corporate Operations Journal"}'::jsonb,
     '["Global Unified Procurement Engine via Smart Contracts", "Hyper-Automated Payroll & Benefits Service Desk", "ESG Sustainable Sourcing & Carbon Supply Chain Tracking", "Cross-Regional Shared Services Hub Standardization"]'::jsonb
 )
 ON CONFLICT (id) DO NOTHING;
@@ -355,6 +370,46 @@ VALUES
     245,
     ARRAY['AI Gateway', 'Cloud', 'Compliance', 'Security']
 )
+ON CONFLICT (id) DO NOTHING;
+
+-- 7. SEED ACHIEVEMENTS & WALL OF RECOGNITION
+INSERT INTO achievements (id, title, recipient_name, recipient_type, recipient_user_id, department_id, date, category, description, impact_metric, presented_by, presenter_user_id)
+VALUES
+(
+    'ach-001',
+    'Global Operational Excellence Pinnacle Award 2026',
+    'Shared Financial Operations Team',
+    'Team',
+    NULL,
+    'GBS-BO',
+    '2026-09-30',
+    'Award',
+    'Celebrated for slashing global monthly financial ledger close from 6 calendar days to an unprecedented 2.5 days across 34 operating subsidiaries.',
+    'Saved 18,000 corporate accounting hours annually and improved fiscal audit accuracy by 99.4%.',
+    'Marcus Vance (EVP Global Head of GBS)',
+    'emp-001'
+),
+(
+    'ach-002',
+    'Enterprise Cloud Modernization Innovation Trophy',
+    'Cloud Infrastructure & DevOps Team',
+    'Team',
+    NULL,
+    'GBS-BTS',
+    '2026-09-15',
+    'Milestone',
+    'Successfully orchestrated the zero-downtime migration of 220 container workloads into the unified multi-cloud mesh with automated disaster failover.',
+    'Attained 99.98% platform uptime and curtailed inter-region egress cloud expenses by $4.2M annually.',
+    'Dr. Aris Thorne (SVP & CIO, GBS-BTS)',
+    'emp-002'
+)
+ON CONFLICT (id) DO NOTHING;
+
+-- 8. SEED AUDIT LOGS
+INSERT INTO audit_logs (id, user_id, action, entity_type, entity_id, details, ip_address)
+VALUES
+('a0000001-0000-0000-0000-000000000001', 'emp-001', 'PORTAL_INITIALIZATION', 'System', 'GBS-PORTAL', '{"status": "ACTIVE", "version": "2.4.0", "engine": "PostgreSQL 14+"}'::jsonb, '10.240.0.1'::inet),
+('a0000002-0000-0000-0000-000000000002', 'emp-001', 'ROLE_VERIFIED', 'User', 'emp-001', '{"assignedRole": "Admin", "ntid": "marcusv"}'::jsonb, '10.240.0.15'::inet)
 ON CONFLICT (id) DO NOTHING;
 
 -- 7. SEED SOPs & RESOURCES

@@ -46,7 +46,7 @@ export const Sidebar: React.FC = () => {
     { label: 'Quick Links', path: '/quicklinks', icon: BookmarkCheck },
     { label: 'Analytics', path: '/analytics', icon: BarChart3 },
     { label: 'CMS Portal', path: '/cms', icon: Edit3, roleRequirement: ['Admin', 'Manager'], badge: 'Admin' },
-    { label: 'Administration', path: '/admin', icon: ShieldCheck, roleRequirement: ['Admin'], badge: 'Core' },
+    { label: 'Admin & Database', path: '/admin', icon: ShieldCheck, roleRequirement: ['Admin'], badge: 'SQL' },
   ];
 
   return (

@@ -79,6 +79,11 @@ CREATE TABLE IF NOT EXISTS departments (
     mission TEXT NOT NULL,
     color VARCHAR(16) NOT NULL DEFAULT '#D71920',
     head_user_id VARCHAR(64), -- Foreign key forward declaration to users(id)
+    employee_count INT NOT NULL DEFAULT 0,
+    teams_count INT NOT NULL DEFAULT 0,
+    active_projects_count INT NOT NULL DEFAULT 0,
+    cover_image TEXT,
+    image_details JSONB NOT NULL DEFAULT '{}'::jsonb,
     strategic_priorities JSONB NOT NULL DEFAULT '[]'::jsonb,
     is_active BOOLEAN NOT NULL DEFAULT true,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -341,6 +346,22 @@ CREATE TABLE IF NOT EXISTS portal_feedback (
     rating INT CHECK (rating >= 1 AND rating <= 5),
     message TEXT NOT NULL,
     status VARCHAR(64) NOT NULL DEFAULT 'New', -- 'New', 'In Review', 'Resolved'
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- =============================================================================
+-- 13. ENTERPRISE AUDIT LOGS (Compliance & Change Tracking)
+-- =============================================================================
+
+CREATE TABLE IF NOT EXISTS audit_logs (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id VARCHAR(64) REFERENCES users(id) ON DELETE SET NULL,
+    action VARCHAR(128) NOT NULL, -- e.g. 'ROLE_UPDATE', 'ANNOUNCEMENT_CREATE', 'SOP_DOWNLOAD'
+    entity_type VARCHAR(64) NOT NULL, -- 'User', 'Announcement', 'Resource', 'Project'
+    entity_id VARCHAR(64) NOT NULL,
+    details JSONB NOT NULL DEFAULT '{}'::jsonb,
+    ip_address INET,
+    user_agent TEXT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 

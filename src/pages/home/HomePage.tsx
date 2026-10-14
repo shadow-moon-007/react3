@@ -10,6 +10,8 @@ import { ResourceCard } from '../../components/cards/ResourceCard';
 import { ProjectCard } from '../../components/cards/ProjectCard';
 import { QuickLinkCard } from '../../components/cards/QuickLinkCard';
 import { TeamCard } from '../../components/cards/TeamCard';
+import { FeaturedGBSSection } from '../../components/home/FeaturedGBSSection';
+import { InsideGBSSection } from '../../components/home/InsideGBSSection';
 import {
   Users,
   Briefcase,
@@ -121,7 +123,10 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. GBS AT A GLANCE (KPIs) */}
+      {/* 2. FEATURED GBS AT A GLANCE (VISUAL STORYTELLING) */}
+      <FeaturedGBSSection />
+
+      {/* 3. GBS OPERATIONAL METRICS (KPIs) */}
       <section>
         <div className="flex items-center justify-between mb-4">
           <div>
@@ -276,7 +281,10 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. LEADERSHIP MESSAGE & UPCOMING EVENTS */}
+      {/* 6. INSIDE GBS (IMAGE-LED STORYTELLING) */}
+      <InsideGBSSection />
+
+      {/* 7. LEADERSHIP MESSAGE & UPCOMING EVENTS */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {/* Leadership Message */}
         <div className="lg:col-span-2 bg-white border border-gray-200/80 rounded-xl p-6 shadow-xs flex flex-col justify-between">
